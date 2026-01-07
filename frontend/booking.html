@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hotel Booking App</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .step { margin: 20px 0; }
+    .error { color: red; }
+    .modal { 
+      display: none; 
+      position: fixed; 
+      top: 50%; left: 50%; 
+      transform: translate(-50%, -50%); 
+      background: white; 
+      padding: 20px; 
+      border: 1px solid #ccc; 
+      z-index: 1001; 
+    }
+    .modal-overlay { 
+      display: none; 
+      position: fixed; 
+      top: 0; left: 0; 
+      width: 100%; height: 100%; 
+      background: rgba(0,0,0,0.5); 
+      z-index: 1000; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Logout -->
+    <button id="logoutBtn" onclick="logout()">Logout</button>
+
+    <!-- Step 1: Search -->
+    <div id="step1" class="step">
+      <h2>Search Hotels</h2>
+      <label for="city">City:</label>
+      <select id="city" onchange="populateHotels()">
+       <option value="">Select City</option>
+       </select>
+
+      <label for="hotel">Hotel:</label>
+      <select id="hotel">
+        <option value="">Select Hotel</option>
+      </select>
+
+      <label for="guests">Guests:</label>
+      <input type="number" id="guests" value="1" min="1">
+
+      <label for="checkIn">Check-In:</label>
+      <input type="date" id="checkIn">
+
+      <label for="checkOut">Check-Out:</label>
+      <input type="date" id="checkOut">
+
+      <button onclick="goToGuestDetails()">Next</button>
+      <p id="errorStep1" class="error"></p>
+    </div>
+
+   
+
+    <!-- Step 2: Guest Details -->
+    <div id="step2" class="step" style="display:none">
+      <h2>Guest Details</h2>
+      <div id="guestFields"></div>
+      <button onclick="addGuestField()">Add Guest</button>
+
+      <h3>Payment Method</h3>
+      <select id="paymentMethod" onchange="showPaymentDetails()">
+        <option value="">Select</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="PayPal">PayPal</option>
+      </select>
+      <div id="paymentDetails"></div>
+
+      <button onclick="goToSummary()">Next</button>
+      <p id="errorStep2" class="error"></p>
+    </div>
+
+    
+
+    <!-- Step 3: Summary -->
+    <div id="step3" class="step" style="display:none">
+      <h2class="modal-title">Booking Summary</h2>
+      <div id="summaryDetails"></div>
+      <button onclick="showConfirmBookingModal()">Confirm Booking</button>
+    </div>
+
+    <!-- Booking Confirmed Page -->
+    <div id="bookingConfirmedPage" class="step" style="display:none; text-align:center; margin-top:50px;">
+      <h2 class="modal-title">Booking Confirmed!</h2>
+      <div id="confirmationDetails"></div>
+       <button onclick="editBooking()">Edit Booking</button>
+       <button onclick="showCancelModal()">Cancel Booking</button>
+       <button onclick="showStartNewBookingModal()">Start New Booking</button>
+    </div>
+
+    <!-- Cancelled Booking Page -->
+    <div id="cancelPage" class="step" style="display:none; text-align:center; margin-top:50px;">
+      <h2>Booking has been cancelled</h2>
+      <button onclick="showRestoreModal()">Restore Booking</button>
+      <button onclick="showStartNewBookingModal()">Start New Booking</button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <!-- Confirm Booking Modal -->
+    <div id="confirmBookingModal" class="modal">
+      <h3 class="modal-text"> Confirm Booking</h3>
+      <p class="modal-text">Are you sure you want to confirm this booking?</p>
+      <button onclick="confirmBookingFinal()">Yes, Confirm</button>
+      <button onclick="hideConfirmBookingModal()">No</button>
+    </div>
+
+    <!-- Cancel Booking Modal -->
+    <div id="cancelModal" class="modal">
+      <p class="modal-text">Do you want to cancel the booking?</p>
+      <button onclick="confirmCancelBooking()">Yes</button>
+      <button onclick="hideCancelModal()">No</button>
+    </div>
+
+    <!-- Restore Booking Modal -->
+    <div id="restoreModal" class="modal">
+      <p class="modal-text">Do you want to restore the booking?</p>
+      <button onclick="restoreBookingConfirmed()">Yes</button>
+      <button onclick="hideRestoreModal()">No</button>
+    </div>
+
+    <!-- Start New Booking Modal -->
+    <div id="startNewBookingModal" class="modal">
+      <p class="modal-text">This will clear the current booking. Continue?</p>
+      <button onclick="confirmStartNewBooking()">Yes</button>
+      <button onclick="hideStartNewBookingModal()">No</button>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

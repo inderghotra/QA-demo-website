@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Demo Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <img src="LOGO (2).png" alt="Logo" class="logo">
+      <h2>Login</h2>
+
+      <label>Username</label>
+      <input type="text" id="email" placeholder="Enter email">
+
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter password">
+      <div class="show-password">
+  <input type="checkbox" id="showPassword" onclick="togglePassword()">
+  <label for="showPassword">Show Password</label>
+</div>
+
+
+
+      <button id="loginBtn" onclick="login()">Login</button>
+      <p id="error" class="error"></p>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
