@@ -24,29 +24,52 @@ CLI Execution: Newman, Playwright Test Runner
 
  Project Structure
 qa-demo-website/
-│
+
 ├── backend/
-│   ├── models/
-│   ├── src/
-│   │   ├── controllers/
+
+ │   ├── models/
+
+ 
+ │   ├── src/
+ 
+ │   │   ├── controllers/
+
 │   │   ├── routes/
+
 │   │   └── middlewares/
+
 │   └── server.js
+
 │
+
 ├── frontend/
+
 │   ├── login.html
+
 │   ├── dashboard.html
+
 │   ├── booking.html
+
 │   ├── app.js
+
 │   └── style.css
+
 │
+
 ├── postman/
+
 │   ├── QA-demo-website.postman_collection.json
+
 │   └── QA-demo-local.postman_environment.json
+
 │
+
 ├── tests/
+
 │   └── playwright/
-│       └── booking.spec.ts
+
+│       └── tests/ page/scripts
+
 │
 └── README.md
 
