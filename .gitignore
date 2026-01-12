@@ -13,3 +13,5 @@ newman/
 # OS
 .DS_Store
 Thumbs.db
+
+tests/playwright/.env
