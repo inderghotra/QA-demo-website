@@ -13,9 +13,12 @@ export class LoginPage {
     this.showPassword = page.locator('//*[@id="showPassword"]');
   }
 
-  async goto() {
-    await this.page.goto(process.env.BASE_URL! + '/login.html');
+async goto() {
+  if (!process.env.BASE_URL) {
+    throw new Error('BASE_URL is not defined. Check .env file');
   }
+  await this.page.goto(`${process.env.BASE_URL}/login.html`);
+}
 
   async login() {
     await this.email.fill(process.env.LOGIN_EMAIL!);

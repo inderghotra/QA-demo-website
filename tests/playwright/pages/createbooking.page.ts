@@ -22,6 +22,13 @@ export class BookingPage {
     readonly creditCardNumberInput: Locator;
     readonly creditCardExpiryInput: Locator;
     readonly creditCardCVCInput: Locator;
+    readonly step1errorMessage: Locator;
+    readonly nameerrorMessage: Locator;
+    readonly emailerrorMessage: Locator;
+    readonly creditcarderrorMessage: Locator;
+    readonly cvverrorMessage: Locator;
+    readonly creditCardExpiryInputerror: Locator;
+
 
     constructor(private page: Page) {
         this.startBookingButton = page.locator('//*[@id="startBookingBtn"]');
@@ -50,6 +57,14 @@ export class BookingPage {
         this.creditCardExpiryInput = page.locator('//*[@id="expiry"]');
         this.creditCardCVCInput = page.locator('//*[@id="cvv"]');
 
+        this.step1errorMessage = page.locator('//*[@id="errorStep1"]');
+        this.nameerrorMessage = page.locator('//*[@id="nameError0"]');
+        this.emailerrorMessage = page.locator('//*[@id="errorStep2"]');
+        this.creditcarderrorMessage = page.locator('//*[@id="cardError"]');
+        this.cvverrorMessage = page.locator('//*[@id="cvvError"]');
+        this.creditCardExpiryInputerror = page.locator('//*[@id="expiryError"]');
+
+        
 
     }
     async selectCity(cityName: string) {
