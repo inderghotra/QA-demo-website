@@ -1,3 +1,13 @@
+name: Playwright Tests CI/CD
+
+# Run on push to main, nightly, or manual trigger
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * *'   # nightly at 2 AM UTC
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -7,19 +17,31 @@ jobs:
       PASSWORD: ${{ secrets.PASSWORD }}
 
     steps:
-      - uses: actions/checkout@v4
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      # Step 2: Setup Node.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - run: npm ci
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npx playwright install --with-deps
+      # Step 4: Install Playwright browsers
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
-      - run: npx playwright test --reporter=html
+      # Step 5: Run all Playwright tests (positive + negative)
+      - name: Run Playwright tests
+        run: npx playwright test --reporter=html
 
-      - uses: actions/upload-artifact@v4
+      # Step 6: Upload HTML test report
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: playwright-report
