@@ -103,6 +103,7 @@ City & hotel selection
 Guest details entry
 Booking confirmation
 Validation of UI state
+Negative test scenarios 
 
 Run UI Tests
 npx playwright test
